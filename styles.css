@@ -1,27 +1,224 @@
-.container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    background-color: #f5f5f5;
+:root {
+  --bg: #070b19;
+  --card-1: linear-gradient(155deg, #2c4bff, #00a8ff);
+  --card-2: linear-gradient(155deg, #7b2cff, #e91e63);
+  --card-3: linear-gradient(155deg, #00a680, #3ecf8e);
+  --card-4: linear-gradient(155deg, #ff6b35, #ffb703);
+  --card-ai: linear-gradient(155deg, #7a8cff, #5ce1e6);
+  --text: #f8faff;
+  --muted: #d8e0ff;
 }
 
-.header {
-    font-size: 2em;
-    color: #333;
+* { box-sizing: border-box; }
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  color: var(--text);
+  background: var(--bg);
 }
 
-.button {
-    padding: 10px 20px;
-    font-size: 1em;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+.phone-shell {
+  width: min(100%, 480px);
+  height: 100dvh;
+  margin: 0 auto;
+  position: relative;
 }
 
-.button:hover {
-    background-color: #0056b3;
+.topbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  padding: max(0.9rem, env(safe-area-inset-top)) 0.9rem 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 0.8rem;
+  align-items: end;
+  background: linear-gradient(180deg, rgba(6, 9, 22, 0.78), rgba(6, 9, 22, 0));
+}
+
+.badge,
+.active-label,
+.meta p { margin: 0; }
+
+.badge {
+  color: #99b8ff;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+h1 {
+  margin: 0.2rem 0 0;
+  font-size: 1.08rem;
+}
+
+.meta {
+  text-align: right;
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
+.game-feed {
+  height: 100dvh;
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+  scrollbar-width: none;
+}
+
+.game-feed::-webkit-scrollbar { display: none; }
+
+.game-card {
+  min-height: 100dvh;
+  scroll-snap-align: start;
+  padding: 5.8rem 1rem 7.6rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.game-card:nth-child(1) { background: var(--card-1); }
+.game-card:nth-child(2) { background: var(--card-2); }
+.game-card:nth-child(3) { background: var(--card-3); }
+.game-card:nth-child(4) { background: var(--card-4); }
+
+.genre {
+  margin: 0;
+  opacity: 0.95;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+h2 {
+  margin: 0.45rem 0;
+  font-size: 2.15rem;
+}
+
+.game-head p { margin: 0; max-width: 34ch; }
+
+.mini-game {
+  border-radius: 18px;
+  background: rgba(7, 11, 25, 0.28);
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  backdrop-filter: blur(4px);
+  padding: 1rem;
+}
+
+.game-status { margin-top: 0; min-height: 2.6em; }
+
+.play-btn,
+.stop-btn,
+.target-btn,
+.rune,
+.lane,
+.ai-create-btn,
+.heart-btn {
+  border: 0;
+  border-radius: 999px;
+  font-weight: 700;
+}
+
+.play-btn,
+.stop-btn,
+.target-btn,
+.lane {
+  padding: 0.65rem 1rem;
+  margin-right: 0.45rem;
+  margin-bottom: 0.45rem;
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+.target-btn {
+  position: relative;
+  left: 0;
+  top: 0;
+  min-width: 52px;
+}
+
+.rune-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.45rem;
+  margin-bottom: 0.45rem;
+}
+
+.rune {
+  padding: 0.7rem;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.18);
+  color: #fff;
+}
+
+.meter {
+  position: relative;
+  height: 14px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 0.5rem 0;
+  overflow: hidden;
+}
+
+.meter-zone {
+  position: absolute;
+  left: 42%;
+  width: 18%;
+  top: 0;
+  bottom: 0;
+  background: rgba(73, 241, 166, 0.6);
+}
+
+.meter-marker {
+  position: absolute;
+  top: -4px;
+  width: 12px;
+  height: 22px;
+  border-radius: 999px;
+  background: #fff;
+}
+
+.ai-create-btn {
+  position: absolute;
+  left: 50%;
+  bottom: calc(1rem + env(safe-area-inset-bottom));
+  transform: translateX(-50%);
+  padding: 0.8rem 1.2rem;
+  font-size: 0.92rem;
+  color: #11183a;
+  background: linear-gradient(145deg, #eff3ff, #9fd4ff);
+  z-index: 12;
+}
+
+.heart-btn {
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  font-size: 1.45rem;
+  color: #fff;
+  background: rgba(7, 11, 25, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  z-index: 12;
+}
+
+.heart-btn.liked {
+  color: #ff5c8a;
+  background: rgba(255, 255, 255, 0.9);
+}
+
+@media (min-width: 700px) {
+  .phone-shell {
+    border-left: 1px solid rgba(255, 255, 255, 0.16);
+    border-right: 1px solid rgba(255, 255, 255, 0.16);
+  }
 }

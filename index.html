@@ -1,20 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple HTML User Interface</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Upswipe Playable Feed</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
-        <h1>Welcome to the Simple HTML UI</h1>
+  <div class="phone-shell">
+    <header class="topbar">
+      <div>
+        <p class="badge">Upswipe</p>
+        <h1>Playable Game Feed</h1>
+      </div>
+      <div class="meta">
+        <p class="active-label">Now playing</p>
+        <p><strong id="activeGame">Galaxy Sprint</strong></p>
+        <p><span id="likesCount">0</span> liked · <span id="dateTimeDisplay">--:--:-- UTC</span></p>
+      </div>
     </header>
-    <main>
-        <p>This is a simple HTML user interface.</p>
-        <button onclick="alert('Button clicked!')">Click Me!</button>
+
+    <main id="gameFeed" class="game-feed" aria-label="Vertical full-screen game feed">
+      <article class="game-card" data-game="Galaxy Sprint" data-accent="var(--card-1)">
+        <div class="game-head">
+          <p class="genre">Arcade Runner</p>
+          <h2>Galaxy Sprint</h2>
+          <p>Dodge the meteor by tapping before impact.</p>
+        </div>
+        <section class="mini-game" data-type="tap-dodge">
+          <p class="game-status">Tap Start then hit meteor before it reaches you.</p>
+          <button class="play-btn" type="button">Start</button>
+          <button class="target-btn" type="button" hidden>☄️</button>
+          <p>Score: <span class="score">0</span></p>
+        </section>
+      </article>
+
+      <article class="game-card" data-game="Dungeon Drift" data-accent="var(--card-2)">
+        <div class="game-head">
+          <p class="genre">Roguelite</p>
+          <h2>Dungeon Drift</h2>
+          <p>Memorize runes and match the shown sequence.</p>
+        </div>
+        <section class="mini-game" data-type="memory-rune">
+          <p class="game-status">Tap Start and repeat the rune order.</p>
+          <button class="play-btn" type="button">Start</button>
+          <div class="rune-grid" hidden>
+            <button class="rune" data-rune="0" type="button">ᚠ</button>
+            <button class="rune" data-rune="1" type="button">ᚢ</button>
+            <button class="rune" data-rune="2" type="button">ᚦ</button>
+          </div>
+          <p>Score: <span class="score">0</span></p>
+        </section>
+      </article>
+
+      <article class="game-card" data-game="Skyline Builder" data-accent="var(--card-3)">
+        <div class="game-head">
+          <p class="genre">City Sim</p>
+          <h2>Skyline Builder</h2>
+          <p>Balance power by keeping the meter inside the green zone.</p>
+        </div>
+        <section class="mini-game" data-type="power-balance">
+          <p class="game-status">Tap Start and stop the moving meter.</p>
+          <button class="play-btn" type="button">Start</button>
+          <div class="meter" hidden>
+            <div class="meter-zone"></div>
+            <div class="meter-marker"></div>
+          </div>
+          <button class="stop-btn" type="button" hidden>Stop</button>
+          <p>Score: <span class="score">0</span></p>
+        </section>
+      </article>
+
+      <article class="game-card" data-game="Neon Rally" data-accent="var(--card-4)">
+        <div class="game-head">
+          <p class="genre">Racing</p>
+          <h2>Neon Rally</h2>
+          <p>Shift lane quickly to avoid incoming traffic.</p>
+        </div>
+        <section class="mini-game" data-type="lane-shift">
+          <p class="game-status">Tap Start, then choose left or right lane in time.</p>
+          <button class="play-btn" type="button">Start</button>
+          <div class="lane-controls" hidden>
+            <button class="lane" data-lane="left" type="button">Left</button>
+            <button class="lane" data-lane="right" type="button">Right</button>
+          </div>
+          <p>Score: <span class="score">0</span></p>
+        </section>
+      </article>
     </main>
-    <footer>
-        <p>&copy; 2026 Simple HTML UI</p>
-    </footer>
+
+    <button id="heartButton" class="heart-btn" type="button" aria-label="Like current game">♡</button>
+    <button id="aiCreateButton" class="ai-create-btn" type="button" aria-label="Create game with AI">✨ AI Create</button>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
